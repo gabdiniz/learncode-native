@@ -10,15 +10,16 @@ export default function App() {
     Lato_700Bold
   });
 
-  if (!fontsLoaded) {
-    // adicionar loader
-  }
-
   return (
-    <View style={styles.container}>
-      <Text style={styles.text}>LearnCode!</Text>
-      <StatusBar style="auto" />
-    </View>
+    <>
+      {
+        fontsLoaded &&
+        <View style={styles.container}>
+          <Text style={styles.text}>LearnCode!</Text>
+          <StatusBar style="auto" />
+        </View>
+      }
+    </>
   );
 }
 
