@@ -2,7 +2,7 @@ import React from 'react';
 import { Lato_400Regular, Lato_700Bold } from '@expo-google-fonts/lato';
 import { useFonts } from 'expo-font';
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import { Background } from './src/components/Background';
 
 export default function App() {
 
@@ -12,26 +12,18 @@ export default function App() {
   });
 
   return (
-    <>
+    <Background>
+      <StatusBar
+        style='light'
+        backgroundColor='transparent'
+        translucent={true}
+      />
       {
         fontsLoaded &&
-        <View style={styles.container}>
-          <Text style={styles.text}>LearnCode!</Text>
-          <StatusBar style="auto" />
-        </View>
+        <>
+
+        </>
       }
-    </>
+    </Background>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  text: {
-    fontFamily: 'Lato_400Regular'
-  }
-});
