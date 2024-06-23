@@ -1,12 +1,13 @@
+import React from 'react';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
-const { Navigator } = createNativeStackNavigator()
+const { Navigator } = createNativeStackNavigator();
 
 export function AppRoutes() {
 
-    return (
-        <Navigator screenOptions={{ headerShown: false }}>
-            <></>
-        </Navigator>
-    )
+  return (
+    <Navigator screenOptions={{ headerShown: false }}>
+      <></>
+    </Navigator>
+  );
 }

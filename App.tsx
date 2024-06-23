@@ -1,3 +1,4 @@
+import React from 'react';
 import { Lato_400Regular, Lato_700Bold } from '@expo-google-fonts/lato';
 import { useFonts } from 'expo-font';
 import { StatusBar } from 'expo-status-bar';
