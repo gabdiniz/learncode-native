@@ -7,8 +7,11 @@ import { Button } from '../../components/Button';
 import { ArrowRight } from 'iconsax-react-native';
 import { colors } from '../../theme';
 import { apiService } from '../../api/apiService';
+import { useNavigation } from '@react-navigation/native';
 
 export function SignUp() {
+
+  const navigation = useNavigation();
 
   const [step, setStep] = useState<number>(1);
   const [name, setName] = useState<string>('');
@@ -26,6 +29,7 @@ export function SignUp() {
     apiService.post('/auth/register', data)
       .then((response) => {
         if (response.message) return Alert.alert('Alerta', response.message);
+        navigation.navigate('signIn');
       })
       .catch((error) => {
         Alert.alert('Error:', error.message);
@@ -52,7 +56,7 @@ export function SignUp() {
 
   function showForgotPassword() {
     return (
-      <TouchableOpacity style={styles.forgotPasswordButton}>
+      <TouchableOpacity style={styles.forgotPasswordButton} onPress={() => navigation.navigate('signIn')}>
         <Text style={styles.forgotPasswordText}>Já tem uma conta?</Text>
       </TouchableOpacity>
     );
