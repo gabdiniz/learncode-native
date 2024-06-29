@@ -6,6 +6,7 @@ import { styles } from './styles';
 import { Button } from '../../components/Button';
 import { ArrowRight } from 'iconsax-react-native';
 import { colors } from '../../theme';
+import { apiService } from '../../api/apiService';
 
 export function SignUp() {
 
@@ -16,7 +17,19 @@ export function SignUp() {
   const [confirmPassword, setConfirmPassword] = useState<string>('');
 
   function onSubmit() {
-    // Adicionar logica de cadastro.
+    const data = {
+      first_name: name.split(' ')[0],
+      last_name: name.split(' ').slice(1).join(' ').trim(),
+      email: email.toLocaleLowerCase().trim(),
+      password
+    };
+    apiService.post('/auth/register', data)
+      .then((response) => {
+        if (response.message) return Alert.alert('Alerta', response.message);
+      })
+      .catch((error) => {
+        Alert.alert('Error:', error.message);
+      });
   }
 
   function validateStep1() {
@@ -55,7 +68,7 @@ export function SignUp() {
             <Input label='Nome Completo:' value={name} setValue={setName} />
             <Input label='E-mail:' value={email} setValue={setEmail} />
             {showForgotPassword()}
-            <Button label='Próximo' icon={<ArrowRight color='white'/>} onPress={validateStep1}/>
+            <Button label='Próximo' icon={<ArrowRight color='white' />} onPress={validateStep1} />
           </>
         }
         {
@@ -64,11 +77,10 @@ export function SignUp() {
             <Input label='Senha:' value={password} setValue={setPassword} secureTextEntry={true} />
             <Input label='Confirmar senha:' value={confirmPassword} setValue={setConfirmPassword} secureTextEntry={true} />
             {showForgotPassword()}
-            <Button label='Concluir cadastro' onPress={validateStep2}/>
-            <Button label='Voltar' onPress={() => setStep(1)} color={colors.darkGray}/>
+            <Button label='Concluir cadastro' onPress={validateStep2} />
+            <Button label='Voltar' onPress={() => setStep(1)} color={colors.darkGray} />
           </>
         }
-
       </View>
     </Background>
   );
